@@ -1,5 +1,7 @@
+#This is the main program
+
 import sys
-sys.path.append('/Users/wilso/Desktop/COMP4142-Project')
+sys.path.append('/Users/wilso/Desktop/COMP4142-Project/COMP4142-UTXOBlockChainSystem')
 import time
 from Blockchain.Core.block_hash import Block_Hash
 from Blockchain.Core.block import Block
@@ -21,18 +23,21 @@ class Blockchain:
         BlockIndex=0
         prevHash= '0'*64
         data = "COMP4142"
-        self.addBlock(BlockIndex,prevHash,data)
+        prevTime=0
+        difficutly=3
+        self.addBlock(BlockIndex,prevHash,data,difficutly,prevTime)
+        print("Created Genesis Block")
 
-    def addBlock(self, BlockIndex, prevHash,data):
+    def addBlock(self, BlockIndex, prevHash,data,difficulty, prevTime):
         timestamp= int(time.time())
         Transaction=f"This is Genesis block : {BlockIndex} "
         merkleRoot = hash_func(Transaction.encode()).hex()
-        newhash = Block_Hash(BlockIndex,merkleRoot, timestamp,prevHash, 4 )
-        print("New Block Added")
-        newhash.mine()
+        newhash = Block_Hash(BlockIndex,merkleRoot, timestamp,prevHash,difficulty,prevTime)
+        mineTime=newhash.mine()
         self.write_on_db([
-            Block(BlockIndex,newhash.__dict__,prevHash,data).__dict__]
+            Block(BlockIndex,newhash.__dict__,prevHash,data,mineTime).__dict__]
             )
+        print("New Block Added")
         #print(json.dumps(self.chain, indent=4))
 
     def main(self):
@@ -46,9 +51,9 @@ class Blockchain:
        while data!='':
             lastBlock= self.fetch_last_block()
             BlockIndex = lastBlock["Index"]+1
-            print(f"Current Block Height is is {BlockIndex}")
+            print(f"Current Block Height is {BlockIndex}")
             prevHash = lastBlock['hash']['curhash']
-            self.addBlock(BlockIndex, prevHash,data)
+            self.addBlock(BlockIndex, prevHash,data,lastBlock['hash']['difficulty'],lastBlock['mineTime'])
             data = input('Please Enter some Data to create new block :')
 
 
