@@ -11,7 +11,7 @@ $ python -m venv .venv
 
 3. Install reruirements
    (
-u need to update the version if necessary)
+u may need to update the version if necessary )
 ```
 pip  install -r requirements.txt 
 ```
