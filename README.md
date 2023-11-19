@@ -14,7 +14,7 @@ $ python -m venv .venv
 ```
 pip  install -r requirements.txt 
 ```
-# Task Items
+#Task Items
 1.  Blockchain Prototype
 2.  Dynamic-difficulty Proof-of-Work Algorithm
 3.  Transaction
