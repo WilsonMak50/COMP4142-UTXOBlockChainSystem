@@ -12,10 +12,7 @@ class Block_Hash:
         self.prevTime= prevTime
     
     def mine(self):
-        if self.prevTime<=10:
-            self.difficulty=self.difficulty+1
-        else:
-            self.difficulty=self.difficulty-1
+
             
         start_time = time.time()
         while (self.curhash[0:self.difficulty])!='0'*self.difficulty:

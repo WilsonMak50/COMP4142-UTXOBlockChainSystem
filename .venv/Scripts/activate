@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\wilso\Desktop\COMP4142-Project\.venv"
+VIRTUAL_ENV="C:\Users\wilso\Desktop\COMP4142-Project\COMP4142-UTXOBlockChainSystem\.venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
